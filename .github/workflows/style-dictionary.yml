@@ -47,10 +47,10 @@ jobs:
           git add dist/*  # Output di folder dist/
           git commit -m "Update generated files"
 
-      # 7. Pull latest changes from remote main branch to avoid conflicts
-      - name: Pull latest changes from main branch
+      # 7. Pull latest changes from remote to avoid conflict (rebase)
+      - name: Pull latest changes from remote main branch
         run: |
-          git pull origin main --rebase  # Menarik perubahan terbaru dengan rebase
+          git pull origin main --rebase  # Mengambil perubahan dari remote dan menggabungkannya dengan rebase
 
       # 8. Push changes using PAT
       - name: Push changes
