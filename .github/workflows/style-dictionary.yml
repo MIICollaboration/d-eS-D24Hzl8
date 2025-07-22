@@ -1,0 +1,49 @@
+name: Style Dictionary Build
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.json'  # Atau sesuaikan dengan file JSON Anda
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**/*.json'  # Atau sesuaikan dengan file JSON Anda
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout Repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # 2. Setup Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Anda bisa memilih versi Node.js yang Anda inginkan
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Install Style Dictionary
+      - name: Install Style Dictionary
+        run: npm install style-dictionary
+
+      # 5. Jalankan Style Dictionary Build
+      - name: Run Style Dictionary build
+        run: npx style-dictionary build --config config.json  # Anda dapat menyesuaikan konfigurasi sesuai kebutuhan
+     
+      # 6. Commit hasil perubahan jika diperlukan
+      - name: Commit generated output
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add dist/*  # Misalnya, dist adalah folder output Anda
+          git commit -m "Update Style Dictionary generated files"
+          git push
