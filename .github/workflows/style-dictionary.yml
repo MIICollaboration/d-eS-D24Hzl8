@@ -1,0 +1,65 @@
+name: Style Dictionary Build
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.json'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**/*.json'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+      checks: write
+      deployments: write
+      issues: write
+      packages: write
+      pull-requests: write
+      repository-projects: write
+      security-events: write
+      statuses: write
+
+    steps:
+      # 1. Checkout Repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      # 2. Setup Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Install Style Dictionary
+      - name: Install Style Dictionary
+        run: npm install style-dictionary
+
+      # 5. Run Style Dictionary Build
+      - name: Run Style Dictionary build
+        run: npx style-dictionary build --config config.json
+     
+      # 6. Commit and push changes
+      - name: Commit generated output
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/*
+          git commit -m "Update Style Dictionary generated files"
+          git remote set-url origin "https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+          git push origin HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
