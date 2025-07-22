@@ -47,14 +47,7 @@ jobs:
           git add dist/*  # Output di folder dist/
           git commit -m "Update generated files"
 
-      # 7. Fetch and merge remote changes to avoid conflict
-      - name: Fetch and merge remote changes
+      # 7. Pull latest changes from remote to avoid conflict (with rebase)
+      - name: Pull latest changes from remote main branch
         run: |
-          git fetch origin main
-          git merge origin/main --no-ff  # Menggabungkan perubahan dari remote ke lokal dengan merge
-
-      # 8. Push changes using PAT
-      - name: Push changes
-        run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/MIICollaboration/d-eS-D24Hzl8.git
-          git push origin main  # Pastikan nama branch sesuai dengan yang ada di repositori Anda
+          git pull origin main --re
