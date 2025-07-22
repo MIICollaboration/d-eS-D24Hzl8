@@ -12,34 +12,6 @@ on:
     paths:
       - '**/*.json'
 
-name: Style Dictionary Build
-
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - '**/*.json'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - '**/*.json'
-
-name: Style Dictionary Build
-
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - '**/*.json'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - '**/*.json'
-
 jobs:
   build:
     runs-on: ubuntu-latest  # Menjalankan di sistem Ubuntu
