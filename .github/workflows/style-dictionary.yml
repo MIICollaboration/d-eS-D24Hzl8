@@ -12,9 +12,23 @@ on:
     paths:
       - '**/*.json'
 
+name: Style Dictionary Build
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.json'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**/*.json'
+
 jobs:
   build:
-    runs-on: ubuntu-latest  # Menjalankan di sistem Ubuntu
+    runs-on: ubuntu-latest
 
     steps:
       # 1. Checkout Repository
@@ -25,29 +39,41 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Versi Node.js yang diinginkan
+          node-version: '16'
 
       # 3. Install dependencies
       - name: Install dependencies
-        run: npm install  # Menginstal dependensi termasuk Style Dictionary
+        run: npm install
 
       # 4. Install Style Dictionary
       - name: Install Style Dictionary
-        run: npm install --save-dev style-dictionary  # Install Style Dictionary
+        run: npm install --save-dev style-dictionary
 
       # 5. Jalankan Style Dictionary build
       - name: Run Style Dictionary build
-        run: npx style-dictionary build --config ./config.json  # Pastikan path ke config.json benar
+        run: npx style-dictionary build --config ./config.json
 
       # 6. Commit generated output
       - name: Commit generated output
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add dist/*  # Output di folder dist/
+          git add dist/*
           git commit -m "Update generated files"
 
-      # 7. Pull latest changes from remote to avoid conflict (with rebase)
-      - name: Pull latest changes from remote main branch
+      # 7. Fetch and reset to remote
+      - name: Fetch and reset to remote main branch
         run: |
-          git pull origin main --re
+          git fetch origin main
+          git reset --hard origin/main  # Reset local branch to match remote
+
+      # 8. Push changes using PAT
+      - name: Push changes
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/MIICollaboration/d-eS-D24Hzl8.git
+          git push origin main
+
+      - name: Debug Git Info
+        run: |
+          git remote -v
+          git status
