@@ -23,7 +23,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
 
       # 2. Setup Node.js
       - name: Set up Node.js
@@ -52,4 +52,4 @@ jobs:
           git commit -m "Update Style Dictionary generated files"
           git push https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
