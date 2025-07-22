@@ -60,5 +60,6 @@ jobs:
           git add dist/*
           git commit -m "Update Style Dictionary generated files"
           git remote set-url origin "https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+          git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
