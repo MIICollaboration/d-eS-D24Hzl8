@@ -1,58 +1,31 @@
-name: Style Dictionary Build
-
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - '**/*.json'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - '**/*.json'
-
 jobs:
   build:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      actions: write
-      checks: write
-      deployments: write
-      issues: write
-      packages: write
-      pull-requests: write
-      repository-projects: write
-      security-events: write
-      statuses: write
+    runs-on: ubuntu-latest  # Menjalankan di sistem Ubuntu
 
     steps:
       # 1. Checkout Repository
       - name: Checkout repository
         uses: actions/checkout@v2
-        with:
-          persist-credentials: false
 
       # 2. Setup Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '16'  # Versi Node.js yang diinginkan
 
       # 3. Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm install  # Menginstal dependensi termasuk Style Dictionary
 
       # 4. Install Style Dictionary
       - name: Install Style Dictionary
-        run: npm install style-dictionary
+        run: npm install --save-dev style-dictionary  # Install Style Dictionary
 
-      # 5. Run Style Dictionary Build
+      # 5. Jalankan Style Dictionary build
       - name: Run Style Dictionary build
-        run: npx style-dictionary build --config config.json
-     
-# 6. Commit generated output
+        run: npx style-dictionary build --config ./config.json  # Pastikan path ke config.json benar
+
+      # 6. Commit generated output
       - name: Commit generated output
         run: |
           git config --global user.name "GitHub Actions"
@@ -63,8 +36,5 @@ jobs:
       # 7. Push changes using PAT
       - name: Push changes
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/MIICollaboration/d-eS-D24Hzl8.git
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/MIICollaboration/d-eS-D24Hzl8.git
           git push origin main  # Pastikan nama branch sesuai dengan yang ada di repositori Anda
-          
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
