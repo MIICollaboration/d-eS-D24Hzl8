@@ -1381,12 +1381,27 @@
       }
     }
   },
+  "Tsel": {
+    "color-neutral-1000": {
+      "value": "#000000",
+      "type": "color"
+    },
+    "color-neutral-800": {
+      "value": "#58595B",
+      "type": "color"
+    },
+    "color-neutral-600": {
+      "value": "#B2B4B6",
+      "type": "color"
+    }
+  },
   "$themes": [],
   "$metadata": {
     "tokenSetOrder": [
       "global",
       "Collection/Mode 1",
-      "Tokens/Mode 1"
+      "Tokens/Mode 1",
+      "Tsel"
     ]
   }
 }
