@@ -1405,6 +1405,10 @@
     "radius-m": {
       "value": "8px",
       "type": "borderRadius"
+    },
+    "border-medium": {
+      "value": "2px",
+      "type": "borderWidth"
     }
   },
   "$themes": [],
