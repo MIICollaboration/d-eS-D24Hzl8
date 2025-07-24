@@ -1188,6 +1188,30 @@
     "border-thin": {
       "value": "1",
       "type": "borderWidth"
+    },
+    "border-form-input": {
+      "value": {
+        "color": "{color-ui-grey-500}",
+        "width": "1",
+        "style": "solid"
+      },
+      "type": "border"
+    },
+    "border-button-grey": {
+      "value": {
+        "color": "{color-ui-grey-500}",
+        "width": "2",
+        "style": "solid"
+      },
+      "type": "border"
+    },
+    "border-button-red": {
+      "value": {
+        "color": "{color-brand-red}",
+        "width": "2",
+        "style": "solid"
+      },
+      "type": "border"
     }
   },
   "$themes": [],
