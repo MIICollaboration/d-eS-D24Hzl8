@@ -1393,6 +1393,18 @@
     "color-neutral-600": {
       "value": "#B2B4B6",
       "type": "color"
+    },
+    "radius-xs": {
+      "value": "2x",
+      "type": "borderRadius"
+    },
+    "radius-s": {
+      "value": "4px",
+      "type": "borderRadius"
+    },
+    "radius-m": {
+      "value": "8px",
+      "type": "borderRadius"
     }
   },
   "$themes": [],
