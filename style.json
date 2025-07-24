@@ -1212,6 +1212,14 @@
         "style": "solid"
       },
       "type": "border"
+    },
+    "border-button-navy": {
+      "value": {
+        "color": "{color-ui-navy-800}",
+        "width": "{border-medium}",
+        "style": "solid"
+      },
+      "type": "border"
     }
   },
   "$themes": [],
