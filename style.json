@@ -25,7 +25,7 @@
       "type": "color"
     },
     "radius-xs": {
-      "value": "2px",
+      "value": "2x",
       "type": "borderRadius"
     },
     "radius-s": {
@@ -673,11 +673,11 @@
       "type": "spacing"
     },
     "spacing-18": {
-      "value": "18px",
+      "value": "18",
       "type": "spacing"
     },
     "spacing-20": {
-      "value": "20px",
+      "value": "20",
       "type": "spacing"
     },
     "border-thick": {
@@ -685,37 +685,37 @@
       "type": "borderWidth"
     },
     "border-thin": {
-      "value": "1px",
+      "value": "1",
       "type": "borderWidth"
     },
     "border-form-input": {
       "value": {
-        "color": "{Tsel.color-ui-grey-500}",
-        "width": "1px",
+        "color": "{color-ui-grey-500}",
+        "width": "1",
         "style": "solid"
       },
       "type": "border"
     },
     "border-button-grey": {
       "value": {
-        "color": "{Tsel.color-ui-grey-500}",
-        "width": "2px",
+        "color": "{color-ui-grey-500}",
+        "width": "2",
         "style": "solid"
       },
       "type": "border"
     },
     "border-button-red": {
       "value": {
-        "color": "{Tsel.color-brand-red}",
-        "width": "2px",
+        "color": "{color-brand-red}",
+        "width": "2",
         "style": "solid"
       },
       "type": "border"
     },
     "border-button-navy": {
       "value": {
-        "color": "{Tsel.color-ui-navy-800}",
-        "width": "{Tsel.border-medium}",
+        "color": "{color-ui-navy-800}",
+        "width": "{border-medium}",
         "style": "solid"
       },
       "type": "border"
