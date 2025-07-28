@@ -93,20 +93,38 @@ StyleDictionary.registerFormat({
 StyleDictionary.registerFormat({
   name: 'typescript/definitions',
   formatter: function(dictionary) {
-    const buildTokenInterface = (obj, indent = '') => {
+    const buildTokenInterface = (obj, indent = '', visited = new Set()) => {
       let result = '';
+      
+      // Prevent infinite recursion by tracking visited objects
+      if (visited.has(obj)) {
+        return `${indent}  [key: string]: any;
+`;
+      }
+      visited.add(obj);
+      
       for (const [key, value] of Object.entries(obj)) {
-        if (value.value !== undefined) {
-          result += `${indent}  ${key}: {\n`;
-          result += `${indent}    value: string;\n`;
-          result += `${indent}    type: '${value.type}';\n`;
-          result += `${indent}  };\n`;
-        } else {
-          result += `${indent}  ${key}: {\n`;
-          result += buildTokenInterface(value, indent + '  ');
-          result += `${indent}  };\n`;
+        // Check if value is a token (has value and type properties)
+        if (value && typeof value === 'object' && value.value !== undefined && value.type !== undefined) {
+          result += `${indent}  ${key}: {
+`;
+          result += `${indent}    value: string;
+`;
+          result += `${indent}    type: '${value.type}';
+`;
+          result += `${indent}  };
+`;
+        } else if (value && typeof value === 'object' && !Array.isArray(value)) {
+          // Only recurse if it's a plain object and not already visited
+          result += `${indent}  ${key}: {
+`;
+          result += buildTokenInterface(value, indent + '  ', new Set(visited));
+          result += `${indent}  };
+`;
         }
       }
+      
+      visited.delete(obj);
       return result;
     };
 
