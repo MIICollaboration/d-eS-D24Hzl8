@@ -4,9 +4,23 @@
     "css": {
       "transformGroup": "css",
       "buildPath": "dist/css/",
+      "files": [
+        {
+          "destination": "variables.css",
+          "format": "css/variables"
+        },
+        {
+          "destination": "styles.css",
+          "format": "css/variables"
+        }
+      ]
+    },
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "dist/scss/",
       "files": [{
-        "destination": "styles.css",
-        "format": "css/variables"
+        "destination": "_variables.scss",
+        "format": "scss/variables"
       }]
     },
     "json": {
@@ -15,6 +29,14 @@
       "files": [{
         "destination": "tokens.json",
         "format": "json"
+      }]
+    },
+    "js": {
+      "transformGroup": "js",
+      "buildPath": "dist/js/",
+      "files": [{
+        "destination": "tokens.js",
+        "format": "javascript/es6"
       }]
     }
   }
